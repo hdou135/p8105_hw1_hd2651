@@ -1,0 +1,15 @@
+---
+title: "P8105_hw1"
+author: "Haoyuan Dou"
+date: "2026-09-25"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problem1
+
+
+# Problem2
