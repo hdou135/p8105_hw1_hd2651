@@ -13,26 +13,25 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 data("penguins", package = "palmerpenguins")
 ```
-The dataset penguins contains variables such as species, islands, bill length, bill depth, flipper length, body mass, sex, and year. The species include Adelie, Gentoo, and Chinstrap. The islands include Torgersen, Biscoe, and Dream. The dataset has `r nrow(penguins)` observations and `r ncol(penguins)` variables. The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)`mm.
+The dataset penguins contains variables such as species, islands, bill length, bill depth, flipper length, body mass, sex, and year. The species include `r paste(unique(penguins$species), collapse = ", ")`. The islands include `r paste(unique(penguins$island), collapse = ", ")`. The dataset has `r nrow(penguins)` observations and `r ncol(penguins)` variables. The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)`mm.
 
-```{r}
+```{r, warning=FALSE}
 # Scatterplot
-library(ggplot2)
+library(tidyverse)
+penguin_plot = ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 
-ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+penguin_plot
 ```
 
 
 ```{r}
 # Export scatterplot
-penguin_plot = ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 
 ggsave("penguin_scatterplot.png", plot = penguin_plot)
 ```
 
 # Problem2
 ```{r}
-library(tidyverse)
 dataframe_P2 = tibble(
   random_sample = rnorm(10),
   logical_vector = random_sample > 0,
@@ -49,10 +48,10 @@ mean(pull(dataframe_P2, factor_vector))
 ```
 The mean can be calculated for the numeric and logical variables, but not for the character and factor variables.
 
-```{r, results='hide'}
+```{r, results='hide', warning=FALSE}
 as.numeric(pull(dataframe_P2, logical_vector))
 as.numeric(pull(dataframe_P2, character_vector))
 as.numeric(pull(dataframe_P2, factor_vector))
 ```
-The logical variables is converted to 0(FALSE) and 1(TRUE). The character variables is converted to NA because values cannot be interpreted as numbers. The factor variables is converted to integer. This helps explain the previous calculation of mean, logical vector can be treated as 0 and 1, but since character and factor variables are not numeric variables, so they cannot be directly calculated.
+The logical variables are converted to 0(FALSE) and 1(TRUE). The character variables are converted to NA because values cannot be interpreted as numbers. The factor variables are converted to integer. This helps explain the previous calculation of mean, logical vector can be treated as 0 and 1, but since character and factor variables are not numeric variables, so they cannot be directly calculated.
 
