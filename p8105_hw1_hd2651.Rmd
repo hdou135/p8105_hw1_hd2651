@@ -31,3 +31,28 @@ ggsave("penguin_scatterplot.png", plot = penguin_plot)
 ```
 
 # Problem2
+```{r}
+library(tidyverse)
+dataframe_P2 = tibble(
+  random_sample = rnorm(10),
+  logical_vector = random_sample > 0,
+  character_vector = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+  factor_vector = factor(c("1", "2", "1", "1", "2", "3", "3", "2", "1", "3"))
+)
+```
+
+```{r}
+mean(pull(dataframe_P2, random_sample))
+mean(pull(dataframe_P2, logical_vector))
+mean(pull(dataframe_P2, character_vector))
+mean(pull(dataframe_P2, factor_vector))
+```
+The mean can be calculated for the numeric and logical variables, but not for the character and factor variables.
+
+```{r, results='hide'}
+as.numeric(pull(dataframe_P2, logical_vector))
+as.numeric(pull(dataframe_P2, character_vector))
+as.numeric(pull(dataframe_P2, factor_vector))
+```
+The logical variables is converted to 0(FALSE) and 1(TRUE). The character variables is converted to NA because values cannot be interpreted as numbers. The factor variables is converted to integer. This helps explain the previous calculation of mean, logical vector can be treated as 0 and 1, but since character and factor variables are not numeric variables, so they cannot be directly calculated.
+
