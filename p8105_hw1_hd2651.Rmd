@@ -10,6 +10,24 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Problem1
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+The dataset penguins contains variables such as species, islands, bill length, bill depth, flipper length, body mass, sex, and year. The species include Adelie, Gentoo, and Chinstrap. The islands include Torgersen, Biscoe, and Dream. The dataset has `r nrow(penguins)` observations and `r ncol(penguins)` variables. The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)`mm.
 
+```{r}
+# Scatterplot
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+```
+
+
+```{r}
+# Export scatterplot
+penguin_plot = ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+
+ggsave("penguin_scatterplot.png", plot = penguin_plot)
+```
 
 # Problem2
